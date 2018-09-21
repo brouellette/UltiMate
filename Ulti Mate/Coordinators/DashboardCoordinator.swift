@@ -13,24 +13,26 @@ final class DashboardCoordinator: ChildCoordinatable {
     // MARK: Properties
     private(set) var appCoordinator: AppCoordinator
     
-    private var navigationController: UINavigationController = UINavigationController()
+    internal var rootViewController: RootViewController {
+        return appCoordinator.rootViewController
+    }
+    
+    private lazy var navigationController: UINavigationController = {
+        let navController: UINavigationController = UINavigationController()
+        navController.navigationBar.tintColor = .white
+        navController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        navController.navigationBar.barTintColor = AppAppearance.UltiMateLightBlue
+        return navController
+    }()
 
     var signedOut: (() -> Void)?
     
     private var dashboardViewModel: DashboardViewModel!
     private var dashboardViewController: DashboardViewController!
     
-    internal var rootViewController: RootViewController {
-        return appCoordinator.rootViewController
-    }
-    
     // MARK: Life Cycle
     init(appCoordinator: AppCoordinator) {
         self.appCoordinator = appCoordinator
-        
-        navigationController.navigationBar.tintColor = .white
-        navigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        navigationController.navigationBar.barTintColor = AppAppearance.UltiMateLightBlue
     }
     
     deinit {
@@ -44,7 +46,7 @@ final class DashboardCoordinator: ChildCoordinatable {
         menuViewModel.signOutHit = { [unowned self] in
             self.signedOut?()
         }
-        menuViewModel.addGameHit = {
+        menuViewModel.addGameHit = { 
             self.showGameCreation()
         }
         

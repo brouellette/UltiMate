@@ -35,16 +35,6 @@ final class DashboardViewController: UIViewController, MenuGestureHandlable {
     
     var menuIsEnabled: Bool = true
     
-    let mkAnnotationView: MKAnnotationView = {
-        let annotation: MKPointAnnotation = MKPointAnnotation()
-        annotation.title = "NEW ANNOTATION!"
-        annotation.coordinate = CLLocationCoordinate2D(latitude: 47.3, longitude: -122.15)
-        
-        let annotationView: MKAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "NewAnnotation")
-        annotationView.isDraggable = true
-        return annotationView
-    }()
-    
     // MARK: Properties
     var mapView: MKMapView = {
         let map: MKMapView = MKMapView()
@@ -95,9 +85,9 @@ final class DashboardViewController: UIViewController, MenuGestureHandlable {
         }
         
         NSLayoutConstraint.activate([
-            mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
@@ -128,7 +118,7 @@ final class DashboardViewController: UIViewController, MenuGestureHandlable {
 }
 
 // MARK: Extension
-extension DashboardViewController: MKMapViewDelegate {
+extension DashboardViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         viewModel.gameSelected?(view.annotation!.title!!)
         mapView.deselectAnnotation(view.annotation, animated: true)

@@ -45,7 +45,7 @@ final class MenuViewController: UIViewController {
         button.addTarget(self, action: #selector(handleSignOutButton), for: .touchUpInside)
         return button
     }()
-    
+        
     private let viewModel: MenuViewModel
     
     // MARK: Life Cycle
