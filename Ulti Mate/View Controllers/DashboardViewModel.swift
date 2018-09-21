@@ -33,27 +33,29 @@ final class DashboardViewModel {
     }
     
     // MARK: Private
-    private func createAnnotation(withDetails details: GameDetails) -> MKPointAnnotation {
+    private func createAnnotation(withInfo info: GameInfo) -> MKPointAnnotation {
         let longitude: Double = Double.random(range: -180...180)
         let latitude: Double = Double.random(range: -90...90)
         let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
         let annotation: MKPointAnnotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-        annotation.title = details.title
-        annotation.subtitle = details.description
+        annotation.title = info.title
+        annotation.subtitle = info.description
         
         return annotation
     }
     
     // MARK: Public    
-    func handleGameDetails(gameDetails: GameDetails) {
-        // Create the visual annotation and add it to the map
-        let gameAnnotation: MKPointAnnotation = createAnnotation(withDetails: gameDetails)
+    func handleGameInfo(gameInfo: GameInfo) {
+        // Create the visual annotation and add it to the map, then scroll to it
+        let gameAnnotation: MKPointAnnotation = createAnnotation(withInfo: gameInfo)
         mapView.addAnnotation(gameAnnotation)
+        mapView.centerCoordinate = gameAnnotation.coordinate
         
         // Store the gameDetails for future presentation of the game
-        let gameDetailViewModel: GameDetailViewModel = GameDetailViewModel(title: gameDetails.title, description: gameDetails.description, competitiveLevel: gameDetails.competitiveLevel)
+        let gameDetailViewModel: GameDetailViewModel = GameDetailViewModel(title: gameInfo.title, description: gameInfo.description, competitiveLevel: gameInfo.competitiveLevel, longitude: gameAnnotation.coordinate.longitude, latitude: gameAnnotation.coordinate.latitude)
+        
         self.gameViewModels.append(gameDetailViewModel)
     }
     

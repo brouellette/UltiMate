@@ -25,7 +25,7 @@ final class GameCreationViewModel {
 //    var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D()
     
     var dismissButtonHit: (() -> Void)?
-    var createButtonHit: ((GameDetails) -> Void)?
+    var createButtonHit: ((GameInfo) -> Void)?
     
     // MARK: Life Cycle
     init() {

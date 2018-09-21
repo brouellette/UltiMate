@@ -12,6 +12,8 @@ final class GameDetailViewModel {
     var title: String
     var description: String
     var competitiveLevel: CompetitiveLevel
+    var longitude: Double
+    var latitude: Double
     
     var dismissButtonHit: (() -> Void)?
     
@@ -29,10 +31,12 @@ final class GameDetailViewModel {
     }
     
     // MARK: Life Cycle
-    init(title: String, description: String, competitiveLevel: CompetitiveLevel) {
+    init(title: String, description: String, competitiveLevel: CompetitiveLevel, longitude: Double, latitude: Double) {
         self.title = title
         self.description = description
         self.competitiveLevel = competitiveLevel
+        self.longitude = longitude
+        self.latitude = latitude
     }
     
     deinit {

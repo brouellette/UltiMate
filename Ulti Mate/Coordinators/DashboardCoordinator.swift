@@ -76,8 +76,8 @@ final class DashboardCoordinator: ChildCoordinatable {
         gameCreationViewModel.dismissButtonHit = {
             self.rootViewController.dismissModalChild(animated: true, type: .normal, completion: nil)
         }
-        gameCreationViewModel.createButtonHit = { gameDetails in
-            self.dashboardViewModel.handleGameDetails(gameDetails: gameDetails)
+        gameCreationViewModel.createButtonHit = { gameInfo in
+            self.dashboardViewModel.handleGameInfo(gameInfo: gameInfo)
             
             self.rootViewController.dismissModalChild(animated: true, type: .normal, completion: nil)
         }

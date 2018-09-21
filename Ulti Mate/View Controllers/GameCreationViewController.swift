@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias GameDetails = (title: String, description: String, competitiveLevel: CompetitiveLevel)
+typealias GameDetails = (title: String, description: String, competitiveLevel: CompetitiveLevel, longitude: CGFloat?, latitude: CGFloat?)
 
 // MARK: - Class
 final class GameCreationViewController: UIViewController {
@@ -139,8 +139,9 @@ final class GameCreationViewController: UIViewController {
     }
     
     @objc private func handleCreateButton() {
-        let gameDetails: GameDetails = GameDetails(title: viewModel.title, description: viewModel.description, competitiveLevel: viewModel.competitiveLevel)
-        viewModel.createButtonHit?(gameDetails)
+        let gameInfo: GameInfo = GameInfo(title: viewModel.title, description: viewModel.description, competitiveLevel: viewModel.competitiveLevel, longitude: nil, latitude: nil)
+        
+        viewModel.createButtonHit?(gameInfo)
     }
     
     // MARK: Private
