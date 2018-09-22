@@ -8,10 +8,16 @@
 
 import UIKit
 import MapKit
-import Contacts
 
 // MARK: - Class
 final class DashboardViewController: UIViewController, MenuGestureHandlable {
+    // MARK: Properties
+    var mapView: MKMapView = {
+        let map: MKMapView = MKMapView()
+        map.translatesAutoresizingMaskIntoConstraints = false
+        return map
+    }()
+    
     var topmostView: UIView? = nil
     
     lazy var menuTapAndPanView: UIView = {
@@ -35,14 +41,7 @@ final class DashboardViewController: UIViewController, MenuGestureHandlable {
     
     var menuIsEnabled: Bool = true
     
-    // MARK: Properties
-    var mapView: MKMapView = {
-        let map: MKMapView = MKMapView()
-        map.translatesAutoresizingMaskIntoConstraints = false
-        return map
-    }()
-    
-    private let viewModel: DashboardViewModel
+    let viewModel: DashboardViewModel
     
     // MARK: Life Cycle
     required init?(coder aDecoder: NSCoder) {
@@ -51,29 +50,22 @@ final class DashboardViewController: UIViewController, MenuGestureHandlable {
     
     init(viewModel: DashboardViewModel) {
         self.viewModel = viewModel
-        self.viewModel.mapView = self.mapView
         super.init(nibName: nil, bundle: nil)
     }
     
     deinit {
-        print("DashboardViewController deallocated")
+        print("DASHBOARDVIEWCONTROLLER DEALLOCATED")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = NSLocalizedString("Find Games", comment: "")
 
         view.backgroundColor = .white
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "HamburgerMenuIcon"), style: .plain, target: self, action: #selector(menuButtonHit))
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Switch Layout", comment: ""), style: .plain, target: self, action: #selector(handleLayoutSwitch))
-        
         mapView.delegate = self
         
-        // Add additional gestures
-        view.addGestureRecognizer(menuEdgePan)
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "HamburgerMenuIcon"), style: .plain, target: self, action: #selector(menuButtonHit))
+
         // Add subviews
         view.addSubview(mapView)
         
@@ -89,6 +81,11 @@ final class DashboardViewController: UIViewController, MenuGestureHandlable {
             mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+        
+        // Handle closures
+        viewModel.gameAdded = { gameInfo in
+            self.addGameAnnotation(withInfo: gameInfo)
+        }
     }
     
     // MARK: Control Handlers
@@ -110,7 +107,13 @@ final class DashboardViewController: UIViewController, MenuGestureHandlable {
     }
     
     // MARK: Private
-    
+    private func addGameAnnotation(withInfo info: GameInfo) {
+        let gameAnnotation: MKPointAnnotation = viewModel.createAnnotation(withInfo: info)
+        
+        // should the mapView be inside the viewModel? I don't think so
+        mapView.addAnnotation(gameAnnotation)
+        mapView.centerCoordinate = gameAnnotation.coordinate
+    }
     
     // MARK: Public
     

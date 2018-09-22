@@ -22,17 +22,12 @@ enum TransitionType {
 
 enum ModalTransitionType {
 	case normal
-    case sheet
 	case fromRight
 	case toRight
 	
 	var animationDuration: TimeInterval {
 		return 0.3
 	}
-    
-    var sheetHeightProportion: CGFloat {
-        return 0.81338
-    }
 	
 	func dimView(withFrame frame: CGRect) -> UIView {
 		let view = UIView(frame: frame)
@@ -339,14 +334,6 @@ extension ContainerTransitionable where Self: UIViewController {
 		case .normal:
 			viewController.view.frame = CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: view.bounds.height)
 			viewController.addShadowForTransition()
-        case .sheet:
-            viewController.view.frame = CGRect(x: 0, y: view.bounds.height * type.sheetHeightProportion, width: view.bounds.width, height: view.bounds.height)
-            
-            modalDimView = type.dimView(withFrame: view.bounds)
-            view.addSubview(modalDimView!)
-            
-            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[view]-(0)-|", options: [], metrics: nil, views: ["view": modalDimView!]))
-            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[view]-(0)-|", options: [], metrics: nil, views: ["view": modalDimView!]))
 		case .fromRight:
 			viewController.view.frame = CGRect(x: view.bounds.width, y: 0, width: view.bounds.width, height: view.bounds.height)
 			viewController.addShadowForTransition()
@@ -389,14 +376,6 @@ extension ContainerTransitionable where Self: UIViewController {
 			}, completion: { finished in
 				finishTransition()
 			})
-        case .sheet:
-            UIView.animate(withDuration: type.animationDuration, animations: {
-                self.setNeedsStatusBarAppearanceUpdate()
-                self.modalDimView?.alpha = 1
-                viewController.view.frame = self.view.bounds
-            }, completion: { finished in
-                finishTransition()
-            })
 		case .fromRight:
 			UIView.animate(withDuration: duration, animations: {
 				self.setNeedsStatusBarAppearanceUpdate()
@@ -455,16 +434,6 @@ extension ContainerTransitionable where Self: UIViewController {
 			}, completion: { finished in
 				finishTransition()
 			})
-        case .sheet:
-            UIView.animate(withDuration: duration, animations: {
-                self.setNeedsStatusBarAppearanceUpdate()
-                self.modalDimView?.alpha = 0
-                visible.view.frame = CGRect(x: 0, y: self.view.bounds.height * type.sheetHeightProportion, width: self.view.bounds.width, height: self.view.bounds.height)
-            }, completion: { finished in
-                self.modalDimView?.removeFromSuperview()
-                self.modalDimView = nil
-                finishTransition()
-            })
 		case .toRight:
 			visible.addShadowForTransition()
 			

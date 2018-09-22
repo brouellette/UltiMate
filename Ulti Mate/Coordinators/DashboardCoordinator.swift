@@ -16,34 +16,21 @@ final class DashboardCoordinator: ChildCoordinatable {
     internal var rootViewController: RootViewController {
         return appCoordinator.rootViewController
     }
-    
-    private lazy var navigationController: UINavigationController = {
-        let navController: UINavigationController = UINavigationController()
-        navController.navigationBar.tintColor = .white
-        navController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        navController.navigationBar.barTintColor = AppAppearance.UltiMateLightBlue
-        return navController
-    }()
 
     var signedOut: (() -> Void)?
     
-    private var dashboardViewModel: DashboardViewModel!
-    private var dashboardViewController: DashboardViewController!
+    private var dashboardContainerViewController: DashboardContainerViewController!
     
     // MARK: Life Cycle
     init(appCoordinator: AppCoordinator) {
         self.appCoordinator = appCoordinator
     }
     
-    deinit {
-        print("Dashboard components deallocated")
-    }
-    
     // MARK: Private
     private func showDashboard() {
         // Set up the controller to display the view that appears upon selection of the hamburger menu button
         let menuViewModel: MenuViewModel = MenuViewModel()
-        menuViewModel.signOutHit = { [unowned self] in
+        menuViewModel.signOutHit = {
             self.signedOut?()
         }
         menuViewModel.addGameHit = { 
@@ -53,23 +40,20 @@ final class DashboardCoordinator: ChildCoordinatable {
         let menuViewController: MenuViewController = MenuViewController(viewModel: menuViewModel)
         
         // Set up the dashboard viewModel and viewController for the main display of the dashboard
-        dashboardViewModel = DashboardViewModel()
-        dashboardViewModel.signedOut = { [unowned self] in
+        let dashboardViewModel: DashboardViewModel = DashboardViewModel()
+        dashboardViewModel.signedOut = {
             self.signedOut?()
         }
-        dashboardViewModel.gameSelected = { [unowned self] gameTitle in
+        dashboardViewModel.gameSelected = { gameTitle in
             self.showGameDetail(forGame: gameTitle)
         }
         
-        dashboardViewController = DashboardViewController(viewModel: dashboardViewModel)
+        let dashboardViewController: DashboardViewController = DashboardViewController(viewModel: dashboardViewModel)
         
         // Put the menuVC and the dashboardVC inside of a container to correctly manage the transition of the menu
-        let dashboardContainerViewController: DashboardContainerViewController = DashboardContainerViewController(menuViewController: menuViewController, dashboardNavigationController: navigationController)
+        dashboardContainerViewController = DashboardContainerViewController(menuViewController: menuViewController, dashboardViewController: dashboardViewController)
         
-        // Finish by populating the navigationController
-        navigationController.setViewControllers([dashboardViewController], animated: false)
-        
-        // Transition to Dashboard
+        // Transition to NavigationController, deallocate SignInViewController
         rootViewController.transitionToViewController(dashboardContainerViewController, animated: true, completion: nil)
     }
     
@@ -79,29 +63,29 @@ final class DashboardCoordinator: ChildCoordinatable {
             self.rootViewController.dismissModalChild(animated: true, type: .normal, completion: nil)
         }
         gameCreationViewModel.createButtonHit = { gameInfo in
-            self.dashboardViewModel.handleGameInfo(gameInfo: gameInfo)
+            self.dashboardContainerViewController.gameAdded?(gameInfo)
             
             self.rootViewController.dismissModalChild(animated: true, type: .normal, completion: nil)
         }
         
         let gameCreationViewController: GameCreationViewController = GameCreationViewController(viewModel: gameCreationViewModel)
         rootViewController.presentChildModally(gameCreationViewController, animated: true, type: .normal, completion: {
-            self.dashboardViewController.toggleMenu()
+            self.dashboardContainerViewController.createAnimationCompleted?()
         })
     }
     
     private func showGameDetail(forGame title: String) {
-        guard let gameDetailViewModel: GameDetailViewModel = dashboardViewModel.gameViewModel(forTitle: title) else {
+        guard let gameDetailViewModel: GameDetailViewModel = dashboardContainerViewController.fetchGameInfo(forTitle: title) else {
             DLog("Error. Could not find a gameDetailViewModel for title: \(title)")
             return
         }
-        
+
         gameDetailViewModel.dismissButtonHit = {
             self.rootViewController.dismissModalChild(animated: true, type: .toRight, completion: nil)
         }
-        
+
         let gameDetailViewController: GameDetailViewController = GameDetailViewController(viewModel: gameDetailViewModel)
-        
+
         rootViewController.presentChildModally(gameDetailViewController, animated: true, type: .fromRight, completion: nil)
     }
     
