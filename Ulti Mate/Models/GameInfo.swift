@@ -14,6 +14,6 @@ struct GameInfo {
     var title: String
     var description: String
     var competitiveLevel: CompetitiveLevel
-    var longitude: Double?
-    var latitude: Double?
+    var longitude: Double
+    var latitude: Double
 }

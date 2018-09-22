@@ -68,9 +68,9 @@ extension MenuGestureHandlable where Self: UIViewController {
 	}
 	
 	func toggleMenu() {
-		guard let menuParent = parentMenuContainableViewController(), menuIsEnabled else  {
-			return
-		}
+        guard let menuParent = parentMenuContainableViewController(), menuIsEnabled else  {
+            return
+        }
 		
 		menuParent.toggleMenu { [unowned self] menuOpen in
 			if menuOpen {

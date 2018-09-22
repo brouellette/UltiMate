@@ -139,7 +139,10 @@ final class GameCreationViewController: UIViewController {
     }
     
     @objc private func handleCreateButton() {
-        let gameInfo: GameInfo = GameInfo(title: viewModel.title, description: viewModel.description, competitiveLevel: viewModel.competitiveLevel, longitude: nil, latitude: nil)
+        let longitude: Double = Double.random(range: -175...175)
+        let latitude: Double = Double.random(range: -85...85)
+        
+        let gameInfo: GameInfo = GameInfo(title: viewModel.title, description: viewModel.description, competitiveLevel: viewModel.competitiveLevel, longitude: longitude, latitude: latitude)
         
         viewModel.createButtonHit?(gameInfo)
     }

@@ -25,10 +25,6 @@ final class OnboardingCoordinator: ChildCoordinatable {
         self.appCoordinator = appCoordinator
     }
     
-    deinit {
-        print("Onboarding components deallocated")
-    }
-    
     // MARK: Private
     private func showSignIn() {
         let signInViewModel: SignInViewModel = SignInViewModel()

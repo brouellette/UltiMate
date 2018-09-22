@@ -46,7 +46,7 @@ final class MenuViewController: UIViewController {
         return button
     }()
         
-    private let viewModel: MenuViewModel
+    let viewModel: MenuViewModel
     
     // MARK: Life Cycle
     required init?(coder aDecoder: NSCoder) {
@@ -93,10 +93,6 @@ final class MenuViewController: UIViewController {
     }
     
     // MARK: Control Handlers
-    @objc private func handleSwitchLayoutButton() {
-        print("switch layout hit!")
-    }
-    
     @objc private func handleCreateGameButton() {
         viewModel.addGameHit?()
     }
