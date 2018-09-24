@@ -9,21 +9,17 @@
 // MARK - Class
 final class GameDetailViewModel {
     // MARK: Properties
-    var title: String
-    var description: String
-    var competitiveLevel: CompetitiveLevel
-    var longitude: Double
-    var latitude: Double
+    var gameInfo: GameInfo
     
     var dismissButtonHit: (() -> Void)?
     
     var competitiveIndex: Int {
-        switch competitiveLevel {
-        case .casual:
+        switch gameInfo.competitiveLevel {
+        case .casual?:
             return 0
-        case .semi:
+        case .semi?:
             return 1
-        case .competitive:
+        case .competitive?:
             return 2
         default:
             return -1
@@ -31,12 +27,8 @@ final class GameDetailViewModel {
     }
     
     // MARK: Life Cycle
-    init(title: String, description: String, competitiveLevel: CompetitiveLevel, longitude: Double, latitude: Double) {
-        self.title = title
-        self.description = description
-        self.competitiveLevel = competitiveLevel
-        self.longitude = longitude
-        self.latitude = latitude
+    init(gameInfo: GameInfo) {
+        self.gameInfo = gameInfo
     }
     
     deinit {

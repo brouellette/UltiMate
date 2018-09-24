@@ -12,6 +12,19 @@ enum CompetitiveLevel {
     case semi
     case competitive
     case none
+    
+    init(index: Int) {
+        switch index {
+        case 0:
+            self = .casual
+        case 1:
+            self = .semi
+        case 2:
+            self = .competitive
+        default:
+            self = .none
+        }
+    }
 }
 
 // MARK: - Class
@@ -21,11 +34,8 @@ final class GameCreationViewModel {
     var description: String = ""
     var playerCount: Int = 0
     var competitiveLevel: CompetitiveLevel = .none
-    
-//    var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D()
-    
-    var dismissButtonHit: (() -> Void)?
-    var createButtonHit: ((GameInfo) -> Void)?
+        
+    var dismiss: (() -> Void)?
     
     // MARK: Life Cycle
     init() {
@@ -39,16 +49,16 @@ final class GameCreationViewModel {
     
     
     // MARK: Public
-    func competitiveLevel(from index: Int) {
-        switch index {
-        case 0:
-            competitiveLevel = .casual
-        case 1:
-            competitiveLevel = .semi
-        case 2:
-            competitiveLevel = .competitive
-        default:
-            competitiveLevel = .none
-        }
+    func createGame() {
+        let longitude: Double = Double.random(in: -175...175)
+        let latitude: Double = Double.random(in: -85...85)
+        
+        let gameInfo: GameInfo = GameInfo(title: title, description: description, competitiveLevel: competitiveLevel, longitude: longitude, latitude: latitude)
+        
+        // Save to some kind of database (Firebase?)
+        AppCoordinator.gameInfoDatabase.append(gameInfo)
+        DLog("Game created and stored successfully!")
+        
+        dismiss?()
     }
 }

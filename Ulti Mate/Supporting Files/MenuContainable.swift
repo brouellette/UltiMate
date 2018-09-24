@@ -46,14 +46,14 @@ extension MenuContainable where Self: UIViewController {
 		return CGRect(x: view.bounds.width * menuWidthMultiplier, y: 0, width: view.bounds.width, height: view.bounds.height)
 	}
 	
-	fileprivate func openMenu(_ duration: TimeInterval, curve: UIViewAnimationCurve = .easeInOut, completion: MenuAnimationCompletion?) {
+	fileprivate func openMenu(_ duration: TimeInterval, curve: UIView.AnimationCurve = .easeInOut, completion: MenuAnimationCompletion?) {
 		guard let visible = visibleViewController else {
 			return
 		}
 		
 		visible.view.addShadowForTransition()
 		
-		let options = UIViewAnimationOptions(rawValue: UInt(curve.rawValue << 16))
+		let options = UIView.AnimationOptions(rawValue: UInt(curve.rawValue << 16))
 		
 		UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
 			visible.view.frame = self.menuOpenFrame
@@ -62,12 +62,12 @@ extension MenuContainable where Self: UIViewController {
 		}
 	}
 	
-	fileprivate func closeMenu(_ duration: TimeInterval, curve: UIViewAnimationCurve = .easeInOut, completion: MenuAnimationCompletion?) {
+	fileprivate func closeMenu(_ duration: TimeInterval, curve: UIView.AnimationCurve = .easeInOut, completion: MenuAnimationCompletion?) {
 		guard let visible = visibleViewController else {
 			return
 		}
 		
-		let options = UIViewAnimationOptions(rawValue: UInt(curve.rawValue << 16))
+		let options = UIView.AnimationOptions(rawValue: UInt(curve.rawValue << 16))
 		
 		UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
 			visible.view.frame = self.menuClosedFrame
