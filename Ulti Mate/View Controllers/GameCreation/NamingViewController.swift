@@ -1,5 +1,5 @@
 //
-//  GameCreationViewController.swift
+//  NamingViewController.swift
 //  Ulti Mate
 //
 //  Created by travis ouellette on 9/20/18.
@@ -11,17 +11,8 @@ import UIKit
 typealias GameDetails = (title: String, description: String, competitiveLevel: CompetitiveLevel, longitude: CGFloat?, latitude: CGFloat?)
 
 // MARK: - Class
-final class GameCreationViewController: UIViewController {
+final class NamingViewController: UIViewController {
     // MARK: Properties
-    private lazy var dismissButton: UIButton = {
-        let button: UIButton = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "XButtonIcon"), for: .normal)
-        button.addTarget(self, action: #selector(handleDismissButton), for: .touchUpInside)
-        button.tintColor = .white
-        return button
-    }()
-    
     private lazy var titleTextField: UITextField = {
         let textField: UITextField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -50,14 +41,14 @@ final class GameCreationViewController: UIViewController {
         return control
     }()
     
-    private lazy var createGameButton: UIButton = {
+    private lazy var continueButton: UIButton = {
         let button: UIButton = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(NSLocalizedString("Create", comment: ""), for: .normal)
+        button.setTitle(NSLocalizedString("Continue", comment: ""), for: .normal)
         button.layer.cornerRadius = 10
         button.backgroundColor = AppAppearance.UltiMateOrange
         button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(handleCreateButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleContinueButton), for: .touchUpInside)
         button.tintColor = .white
         return button
     }()
@@ -66,14 +57,14 @@ final class GameCreationViewController: UIViewController {
         return .lightContent
     }
     
-    private let viewModel: GameCreationViewModel
+    private let viewModel: NamingViewModel
     
     // MARK: Life Cycle
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(viewModel: GameCreationViewModel) {
+    init(viewModel: NamingViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -85,23 +76,22 @@ final class GameCreationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = NSLocalizedString("Name the Game", comment: "")
+        
         view.backgroundColor = AppAppearance.UltiMateDarkBlue
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing)))
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "XButtonIcon"), style: .plain, target: self, action: #selector(handleDismissButton))
+        
         // Add subviews
-        view.addSubview(dismissButton)
         view.addSubview(titleTextField)
         view.addSubview(descriptionTextField)
         view.addSubview(segmentedControl)
-        view.addSubview(createGameButton)
+        view.addSubview(continueButton)
         
         // Layout subviews
         NSLayoutConstraint.activate([
-            dismissButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 25 + UIApplication.shared.statusBarFrame.height),
-            dismissButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            dismissButton.widthAnchor.constraint(equalToConstant: 25),
-            dismissButton.heightAnchor.constraint(equalToConstant: 25),
             titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
             titleTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -25 - 10 - 50 - 10),
@@ -114,16 +104,21 @@ final class GameCreationViewController: UIViewController {
             segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
             segmentedControl.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 10),
             segmentedControl.heightAnchor.constraint(equalToConstant: 50),
-            createGameButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
-            createGameButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            createGameButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            createGameButton.heightAnchor.constraint(equalToConstant: 50)
+            continueButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            continueButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            continueButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            continueButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 
     // MARK: Control Handlers
     @objc private func handleDismissButton() {
         viewModel.dismiss?()
+    }
+    
+    @objc private func handleContinueButton() {
+        viewModel.continueToMap?()
+        viewModel.createGame()
     }
     
     @objc private func handleTextFieldChanged(_ sender: UITextField) {
@@ -136,10 +131,6 @@ final class GameCreationViewController: UIViewController {
     
     @objc private func handleSegmentedControl(_ sender: UISegmentedControl) {
         viewModel.competitiveLevel = CompetitiveLevel(index: sender.selectedSegmentIndex)
-    }
-    
-    @objc private func handleCreateButton() {
-        viewModel.createGame()
     }
     
     // MARK: Private

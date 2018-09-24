@@ -1,5 +1,5 @@
 //
-//  GameCreationViewModel.swift
+//  NamingViewModel.swift
 //  Ulti Mate
 //
 //  Created by travis ouellette on 9/20/18.
@@ -28,7 +28,7 @@ enum CompetitiveLevel {
 }
 
 // MARK: - Class
-final class GameCreationViewModel {
+final class NamingViewModel {
     // MARK: Properties
     var title: String = ""
     var description: String = ""
@@ -36,6 +36,7 @@ final class GameCreationViewModel {
     var competitiveLevel: CompetitiveLevel = .none
         
     var dismiss: (() -> Void)?
+    var continueToMap: (() -> Void)?
     
     // MARK: Life Cycle
     init() {
@@ -58,7 +59,5 @@ final class GameCreationViewModel {
         // Save to some kind of database (Firebase?)
         AppCoordinator.gameInfoDatabase.append(gameInfo)
         DLog("Game created and stored successfully!")
-        
-        dismiss?()
     }
 }

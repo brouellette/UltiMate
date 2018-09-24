@@ -12,11 +12,15 @@
 		C40F48742154031400965710 /* MenuGestureHandlable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F48722154031400965710 /* MenuGestureHandlable.swift */; };
 		C40F48752154031400965710 /* MenuContainable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F48732154031400965710 /* MenuContainable.swift */; };
 		C40F487721542C0D00965710 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F487621542C0D00965710 /* MenuViewModel.swift */; };
-		C40F487921547EDA00965710 /* GameCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F487821547EDA00965710 /* GameCreationViewController.swift */; };
-		C40F487B21547F1A00965710 /* GameCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F487A21547F1A00965710 /* GameCreationViewModel.swift */; };
+		C40F487921547EDA00965710 /* NamingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F487821547EDA00965710 /* NamingViewController.swift */; };
+		C40F487B21547F1A00965710 /* NamingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F487A21547F1A00965710 /* NamingViewModel.swift */; };
 		C425584521593D9800B0E499 /* GameCreationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425584421593D9800B0E499 /* GameCreationCoordinator.swift */; };
 		C4255847215969A000B0E499 /* GameAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4255846215969A000B0E499 /* GameAnnotation.swift */; };
 		C425584921596A0C00B0E499 /* GameAnnotationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425584821596A0C00B0E499 /* GameAnnotationViewModel.swift */; };
+		C425584E21597DBE00B0E499 /* PickLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425584D21597DBE00B0E499 /* PickLocationViewController.swift */; };
+		C425585021597F6800B0E499 /* PickLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425584F21597F6800B0E499 /* PickLocationViewModel.swift */; };
+		C42558522159807B00B0E499 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42558512159807B00B0E499 /* ReviewViewController.swift */; };
+		C4255854215980BB00B0E499 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4255853215980BB00B0E499 /* ReviewViewModel.swift */; };
 		C44E3C49213A4E7600FE965F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E3C48213A4E7600FE965F /* AppDelegate.swift */; };
 		C44E3C51213A4E7600FE965F /* Ulti_Mate.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C44E3C4F213A4E7600FE965F /* Ulti_Mate.xcdatamodeld */; };
 		C44E3C53213A4E7700FE965F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C44E3C52213A4E7700FE965F /* Assets.xcassets */; };
@@ -46,11 +50,15 @@
 		C40F48722154031400965710 /* MenuGestureHandlable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuGestureHandlable.swift; sourceTree = "<group>"; };
 		C40F48732154031400965710 /* MenuContainable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuContainable.swift; sourceTree = "<group>"; };
 		C40F487621542C0D00965710 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
-		C40F487821547EDA00965710 /* GameCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCreationViewController.swift; sourceTree = "<group>"; };
-		C40F487A21547F1A00965710 /* GameCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCreationViewModel.swift; sourceTree = "<group>"; };
+		C40F487821547EDA00965710 /* NamingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamingViewController.swift; sourceTree = "<group>"; };
+		C40F487A21547F1A00965710 /* NamingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamingViewModel.swift; sourceTree = "<group>"; };
 		C425584421593D9800B0E499 /* GameCreationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCreationCoordinator.swift; sourceTree = "<group>"; };
 		C4255846215969A000B0E499 /* GameAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnnotation.swift; sourceTree = "<group>"; };
 		C425584821596A0C00B0E499 /* GameAnnotationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnnotationViewModel.swift; sourceTree = "<group>"; };
+		C425584D21597DBE00B0E499 /* PickLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLocationViewController.swift; sourceTree = "<group>"; };
+		C425584F21597F6800B0E499 /* PickLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLocationViewModel.swift; sourceTree = "<group>"; };
+		C42558512159807B00B0E499 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		C4255853215980BB00B0E499 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		C44E3C45213A4E7600FE965F /* Ulti Mate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ulti Mate.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44E3C48213A4E7600FE965F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C44E3C50213A4E7600FE965F /* Ulti_Mate.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ulti_Mate.xcdatamodel; sourceTree = "<group>"; };
@@ -87,6 +95,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C425584A21597B6D00B0E499 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				C44E3C6E213A5E5800FE965F /* SignInViewModel.swift */,
+				C44E3C5D213A531500FE965F /* SignInViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		C425584B21597B7700B0E499 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				C40F487621542C0D00965710 /* MenuViewModel.swift */,
+				C40F486E2152A08E00965710 /* MenuViewController.swift */,
+				C44E3C74213AFE8700FE965F /* DashboardViewModel.swift */,
+				C44E3C72213AFE5A00FE965F /* DashboardViewController.swift */,
+				C40F48702154028D00965710 /* DashboardContainerViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		C425584C21597B7E00B0E499 /* GameCreation */ = {
+			isa = PBXGroup;
+			children = (
+				C40F487A21547F1A00965710 /* NamingViewModel.swift */,
+				C40F487821547EDA00965710 /* NamingViewController.swift */,
+				C425584F21597F6800B0E499 /* PickLocationViewModel.swift */,
+				C425584D21597DBE00B0E499 /* PickLocationViewController.swift */,
+				C4255853215980BB00B0E499 /* ReviewViewModel.swift */,
+				C42558512159807B00B0E499 /* ReviewViewController.swift */,
+			);
+			path = GameCreation;
+			sourceTree = "<group>";
+		};
 		C44E3C3C213A4E7600FE965F = {
 			isa = PBXGroup;
 			children = (
@@ -137,15 +179,9 @@
 			isa = PBXGroup;
 			children = (
 				C44E3C67213A57FB00FE965F /* RootViewController.swift */,
-				C44E3C6E213A5E5800FE965F /* SignInViewModel.swift */,
-				C44E3C5D213A531500FE965F /* SignInViewController.swift */,
-				C44E3C74213AFE8700FE965F /* DashboardViewModel.swift */,
-				C44E3C72213AFE5A00FE965F /* DashboardViewController.swift */,
-				C40F48702154028D00965710 /* DashboardContainerViewController.swift */,
-				C40F487621542C0D00965710 /* MenuViewModel.swift */,
-				C40F486E2152A08E00965710 /* MenuViewController.swift */,
-				C40F487A21547F1A00965710 /* GameCreationViewModel.swift */,
-				C40F487821547EDA00965710 /* GameCreationViewController.swift */,
+				C425584A21597B6D00B0E499 /* Onboarding */,
+				C425584B21597B7700B0E499 /* Search */,
+				C425584C21597B7E00B0E499 /* GameCreation */,
 				C44E3C81213B4E8C00FE965F /* GameDetailViewModel.swift */,
 				C44E3C7F213B4E8000FE965F /* GameDetailViewController.swift */,
 			);
@@ -265,7 +301,9 @@
 				C44E3C6B213A581500FE965F /* ContainerTransitionable.swift in Sources */,
 				C44E3C71213AFE0500FE965F /* SearchCoordinator.swift in Sources */,
 				C40F48712154028D00965710 /* DashboardContainerViewController.swift in Sources */,
+				C425584E21597DBE00B0E499 /* PickLocationViewController.swift in Sources */,
 				C44E3C6C213A581500FE965F /* ViewControllerContainable.swift in Sources */,
+				C42558522159807B00B0E499 /* ReviewViewController.swift in Sources */,
 				C44E3C79213B072B00FE965F /* UpdatableProperty.swift in Sources */,
 				C44E3C7E213B0D7900FE965F /* DashboardTableViewModel.swift in Sources */,
 				C44E3C75213AFE8700FE965F /* DashboardViewModel.swift in Sources */,
@@ -273,11 +311,13 @@
 				C44E3C63213A53CC00FE965F /* AppCoordinator.swift in Sources */,
 				C425584921596A0C00B0E499 /* GameAnnotationViewModel.swift in Sources */,
 				C44E3C77213B055A00FE965F /* Utils.swift in Sources */,
-				C40F487921547EDA00965710 /* GameCreationViewController.swift in Sources */,
+				C40F487921547EDA00965710 /* NamingViewController.swift in Sources */,
 				C44E3C5E213A531500FE965F /* SignInViewController.swift in Sources */,
 				C40F487721542C0D00965710 /* MenuViewModel.swift in Sources */,
 				C44E3C68213A57FB00FE965F /* RootViewController.swift in Sources */,
-				C40F487B21547F1A00965710 /* GameCreationViewModel.swift in Sources */,
+				C40F487B21547F1A00965710 /* NamingViewModel.swift in Sources */,
+				C4255854215980BB00B0E499 /* ReviewViewModel.swift in Sources */,
+				C425585021597F6800B0E499 /* PickLocationViewModel.swift in Sources */,
 				C40F486F2152A08E00965710 /* MenuViewController.swift in Sources */,
 				C44E3C7C213B096400FE965F /* DashboardTableViewCell.swift in Sources */,
 				C44E3C6F213A5E5800FE965F /* SignInViewModel.swift in Sources */,
