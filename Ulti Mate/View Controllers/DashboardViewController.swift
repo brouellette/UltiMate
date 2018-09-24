@@ -1,5 +1,5 @@
 //
-//  DashboardViewController.swift
+//  SearchViewController.swift
 //  Ulti Mate
 //
 //  Created by travis ouellette on 9/1/18.
@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 // MARK: - Class
-final class DashboardViewController: UIViewController, MenuGestureHandlable {
+final class SearchViewController: UIViewController, MenuGestureHandlable {
     // MARK: Properties
     var mapView: MKMapView = {
         let map: MKMapView = MKMapView()
@@ -60,11 +60,13 @@ final class DashboardViewController: UIViewController, MenuGestureHandlable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "HamburgerMenuIcon"), style: .plain, target: self, action: #selector(menuButtonHit))
+
         view.backgroundColor = .white
         
         mapView.delegate = self
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "HamburgerMenuIcon"), style: .plain, target: self, action: #selector(menuButtonHit))
+        view.addGestureRecognizer(menuEdgePan)
 
         // Add subviews
         view.addSubview(mapView)
@@ -81,11 +83,10 @@ final class DashboardViewController: UIViewController, MenuGestureHandlable {
             mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-        
-        // Handle closures
-        viewModel.gameAdded = { gameInfo in
-            self.addGameAnnotation(withInfo: gameInfo)
-        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        addMapAnnotations()
     }
     
     // MARK: Control Handlers
@@ -107,12 +108,11 @@ final class DashboardViewController: UIViewController, MenuGestureHandlable {
     }
     
     // MARK: Private
-    private func addGameAnnotation(withInfo info: GameInfo) {
-        let gameAnnotation: MKPointAnnotation = viewModel.createAnnotation(withInfo: info)
-        
-        // should the mapView be inside the viewModel? I don't think so
-        mapView.addAnnotation(gameAnnotation)
-        mapView.centerCoordinate = gameAnnotation.coordinate
+    private func addMapAnnotations() {
+        AppCoordinator.gameInfoDatabase.forEach { info in
+            let gameAnnotation: GameAnnotation = viewModel.createAnnotation(withInfo: info)
+            mapView.addAnnotation(gameAnnotation)
+        }
     }
     
     // MARK: Public
@@ -121,9 +121,15 @@ final class DashboardViewController: UIViewController, MenuGestureHandlable {
 }
 
 // MARK: Extension
-extension DashboardViewController: MKMapViewDelegate, CLLocationManagerDelegate {
+extension SearchViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        viewModel.gameSelected?(view.annotation!.title!!)
         mapView.deselectAnnotation(view.annotation, animated: true)
+        
+        guard let annotation: GameAnnotation = view.annotation as? GameAnnotation else {
+            DLog("Error. Nil annotation")
+            return
+        }
+        
+        viewModel.gameSelected?(annotation.viewModel.gameInfo)
     }
 }

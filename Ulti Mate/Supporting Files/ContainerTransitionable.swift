@@ -105,12 +105,12 @@ extension ContainerTransitionable where Self: UIViewController {
 	// Returns the child view controller at index childViewControllers.count - 2
 	var nextVisibleViewController: UIViewController? {
 		// If there is less than or equal to one child view controller, or the root view has less than or equal to one subview, return nil
-		if childViewControllers.count <= 1 || view.subviews.count <= 1 {
+		if children.count <= 1 || view.subviews.count <= 1 {
 			return nil
 		}
 		
 		// Pair childVCs with their view's subview index, sort by subview index, then
-		var sortedChildVCs: [UIViewController] = childViewControllers.map { childVC -> (childVC: UIViewController, subviewIndex: Int) in
+		var sortedChildVCs: [UIViewController] = children.map { childVC -> (childVC: UIViewController, subviewIndex: Int) in
 			return (childVC: childVC, subviewIndex: view.subviews.index(of: childVC.view)!)
 			}.sorted { (childVCSubviewIndex1, childVCSubviewIndex2) -> Bool in
 				return childVCSubviewIndex1.subviewIndex < childVCSubviewIndex2.subviewIndex
@@ -231,8 +231,8 @@ extension ContainerTransitionable where Self: UIViewController {
 		// Disable user interaction on the visible VC
 		visible.view.isUserInteractionEnabled = false
 		
-		visible.willMove(toParentViewController: nil)
-		addChildViewController(viewController)
+		visible.willMove(toParent: nil)
+		addChild(viewController)
 		
 		visible.beginAppearanceTransition(false, animated: animated)
 		viewController.beginAppearanceTransition(true, animated: animated)
@@ -261,8 +261,8 @@ extension ContainerTransitionable where Self: UIViewController {
 			visible.endAppearanceTransition()
 			viewController.endAppearanceTransition()
 			
-			visible.removeFromParentViewController()
-			viewController.didMove(toParentViewController: self)
+			visible.removeFromParent()
+			viewController.didMove(toParent: self)
 			
 			completion?()
 		}
@@ -290,7 +290,7 @@ extension ContainerTransitionable where Self: UIViewController {
 		
 		let nextVisible: UIViewController? = nextVisibleViewController
 		
-		visible.willMove(toParentViewController: nil)
+		visible.willMove(toParent: nil)
 		visible.beginAppearanceTransition(false, animated: animated)
 		nextVisible?.beginAppearanceTransition(true, animated: animated)
 		
@@ -302,7 +302,7 @@ extension ContainerTransitionable where Self: UIViewController {
 			visible.endAppearanceTransition()
 			nextVisible?.endAppearanceTransition()
 			
-			visible.removeFromParentViewController()
+			visible.removeFromParent()
 			
 			removingVisibleViewController = false
 			completion?()
@@ -328,7 +328,7 @@ extension ContainerTransitionable where Self: UIViewController {
 		// Disable user interaction on the visible VC
 		visible.view.isUserInteractionEnabled = false
 		
-		addChildViewController(viewController)
+		addChild(viewController)
 		
 		switch type {
 		case .normal:
@@ -360,7 +360,7 @@ extension ContainerTransitionable where Self: UIViewController {
 			if animated {
 				viewController.endAppearanceTransition()
 			}
-			viewController.didMove(toParentViewController: self)
+			viewController.didMove(toParent: self)
 			
 			completion?()
 		}
@@ -402,7 +402,7 @@ extension ContainerTransitionable where Self: UIViewController {
 		
 		let nextVisible: UIViewController? = nextVisibleViewController
 		
-		visible.willMove(toParentViewController: nil)
+		visible.willMove(toParent: nil)
 		visible.beginAppearanceTransition(false, animated: animated)
 		nextVisible?.beginAppearanceTransition(true, animated: animated)
 		
@@ -415,7 +415,7 @@ extension ContainerTransitionable where Self: UIViewController {
 			visible.endAppearanceTransition()
 			nextVisible?.endAppearanceTransition()
 			
-			visible.removeFromParentViewController()
+			visible.removeFromParent()
 			
 			removingVisibleViewController = false
 			completion?()
@@ -470,7 +470,7 @@ extension ContainerTransitionable where Self: UIViewController {
 			visible.view.frame = newFrame
 		case .ended, .cancelled, .failed:
 			if velocity > 0 {	// Dismissing
-				visible.willMove(toParentViewController: nil)
+				visible.willMove(toParent: nil)
 				visible.beginAppearanceTransition(false, animated: true)
 				
 				let nextVisible: UIViewController? = nextVisibleViewController
@@ -484,7 +484,7 @@ extension ContainerTransitionable where Self: UIViewController {
 					visible.view.removeFromSuperview()
 					visible.endAppearanceTransition()
 					nextVisible?.endAppearanceTransition()
-					visible.removeFromParentViewController()
+					visible.removeFromParent()
 					completion?(true)
 				})
 				
@@ -499,7 +499,7 @@ extension ContainerTransitionable where Self: UIViewController {
 			} else {	// 0 Velocity (released without any horizontal movement)
 				// Dismissing
 				if percentComplete >= 0.5 {
-					visible.willMove(toParentViewController: nil)
+					visible.willMove(toParent: nil)
 					visible.beginAppearanceTransition(false, animated: true)
 					
 					let nextVisible: UIViewController? = nextVisibleViewController
@@ -514,7 +514,7 @@ extension ContainerTransitionable where Self: UIViewController {
 						visible.endAppearanceTransition()
 						
 						nextVisible?.endAppearanceTransition()
-						visible.removeFromParentViewController()
+						visible.removeFromParent()
 						completion?(true)
 					})
 					

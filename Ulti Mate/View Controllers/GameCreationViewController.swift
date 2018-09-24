@@ -123,7 +123,7 @@ final class GameCreationViewController: UIViewController {
 
     // MARK: Control Handlers
     @objc private func handleDismissButton() {
-        viewModel.dismissButtonHit?()
+        viewModel.dismiss?()
     }
     
     @objc private func handleTextFieldChanged(_ sender: UITextField) {
@@ -135,16 +135,11 @@ final class GameCreationViewController: UIViewController {
     }
     
     @objc private func handleSegmentedControl(_ sender: UISegmentedControl) {
-        viewModel.competitiveLevel(from: sender.selectedSegmentIndex)
+        viewModel.competitiveLevel = CompetitiveLevel(index: sender.selectedSegmentIndex)
     }
     
     @objc private func handleCreateButton() {
-        let longitude: Double = Double.random(range: -175...175)
-        let latitude: Double = Double.random(range: -85...85)
-        
-        let gameInfo: GameInfo = GameInfo(title: viewModel.title, description: viewModel.description, competitiveLevel: viewModel.competitiveLevel, longitude: longitude, latitude: latitude)
-        
-        viewModel.createButtonHit?(gameInfo)
+        viewModel.createGame()
     }
     
     // MARK: Private

@@ -23,7 +23,7 @@ final class GameDetailViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("\(viewModel.title)", comment: "")
+        label.text = NSLocalizedString("\(viewModel.gameInfo.title)", comment: "")
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
         return label
@@ -42,7 +42,7 @@ final class GameDetailViewController: UIViewController {
     private lazy var descriptionTextView: UITextView = {
         let textView: UITextView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.text = NSLocalizedString("\(viewModel.description)", comment: "")
+        textView.text = NSLocalizedString("\(viewModel.gameInfo.description ?? "")", comment: "")
         textView.backgroundColor = .white
         textView.isEditable = false
         textView.font = UIFont.systemFont(ofSize: 16)

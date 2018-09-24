@@ -22,6 +22,8 @@ final class AppCoordinator {
     private(set) var rootViewController: RootViewController
     private(set) var childCoordinators: [ChildCoordinatable] = []
     
+    static var gameInfoDatabase: [GameInfo] = []
+    
     // MARK: Life Cycle
     init(rootViewController: RootViewController) {
         self.rootViewController = rootViewController
@@ -34,28 +36,42 @@ final class AppCoordinator {
     // MARK: Private
     private func showOnboarding() {
         let onboardingCoordinator: OnboardingCoordinator = OnboardingCoordinator(appCoordinator: self)
-        onboardingCoordinator.signedIn = { [unowned self] in
+        onboardingCoordinator.signedIn = {
             self.childCoordinators.removeLast()
-            self.showDashboard()
+            self.showSearch()
         }
-        onboardingCoordinator.findButtonTapped = { [unowned self] in
+        onboardingCoordinator.findButtonTapped = {
             self.childCoordinators.removeLast()
-            self.showDashboard()
+            self.showSearch()
         }
         
         childCoordinators.append(onboardingCoordinator)
         onboardingCoordinator.start()
     }
     
-    private func showDashboard() {
-        let dashboardCoordinator: DashboardCoordinator = DashboardCoordinator(appCoordinator: self)
-        dashboardCoordinator.signedOut = { [unowned self] in
+    private func showSearch() {
+        let dashboardCoordinator: SearchCoordinator = SearchCoordinator(appCoordinator: self)
+        dashboardCoordinator.signedOut = {
             self.childCoordinators.removeLast()
             self.showOnboarding()
+        }
+        dashboardCoordinator.addGame = {
+            // Modal presentation, therefore there's no need to remove SearchCoordinator since it must appear once the modal is dismissed
+            self.showGameCreation()
         }
         
         childCoordinators.append(dashboardCoordinator)
         dashboardCoordinator.start()
+    }
+    
+    private func showGameCreation() {
+        let gameCreationCoordinator: GameCreationCoordinator = GameCreationCoordinator(appCoordinator: self)
+        gameCreationCoordinator.dismissed = {
+            self.childCoordinators.removeLast()
+        }
+        
+        childCoordinators.append(gameCreationCoordinator)
+        gameCreationCoordinator.start()
     }
     
     // MARK: Public

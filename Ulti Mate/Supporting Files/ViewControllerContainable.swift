@@ -19,14 +19,14 @@ protocol ViewControllerContainable: NSObjectProtocol {
 extension ViewControllerContainable where Self: UIViewController {
 	var visibleViewController: UIViewController? {
 		// If there are no child view controllers, or the root view has no subviews, return nil
-		if childViewControllers.count == 0 || view.subviews.count == 0 {
+		if children.count == 0 || view.subviews.count == 0 {
 			return nil
 		}
 		
 		// Iterate through all the child view controllers, keeping track of the subview index
 		var topmostChildVC: UIViewController? = nil
 		var currentTopmostSubviewIndex: Int = -1
-		childViewControllers.forEach { childVC in
+		children.forEach { childVC in
 			guard let subviewIndex = view.subviews.index(of: childVC.view) else {
 				return
 			}
@@ -49,7 +49,7 @@ extension ViewControllerContainable where Self: UIViewController {
 	func setVisibleViewController(_ viewController: UIViewController, callAppearanceFunctions: Bool) {
         let alreadyHasVisible: Bool = visibleViewController != nil
 		
-		addChildViewController(viewController)
+		addChild(viewController)
 		
 		if callAppearanceFunctions {
 			viewController.beginAppearanceTransition(true, animated: false)
@@ -62,7 +62,7 @@ extension ViewControllerContainable where Self: UIViewController {
 			viewController.endAppearanceTransition()
 		}
 		
-		viewController.didMove(toParentViewController: self)
+		viewController.didMove(toParent: self)
 		setNeedsStatusBarAppearanceUpdate()
 	}
 	

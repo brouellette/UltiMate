@@ -1,5 +1,5 @@
 //
-//  DashboardContainerViewController.swift
+//  SearchContainerViewController.swift
 //  Ulti Mate
 //
 //  Created by travis ouellette on 9/20/18.
@@ -10,15 +10,15 @@ import UIKit
 
 // MARK: - Class
 //                                                            This is for menu | this is for gestures | This is for transitions like gameDetail
-final class DashboardContainerViewController: UIViewController, MenuContainable, ContainerTransitionable {
+final class SearchContainerViewController: UIViewController, MenuContainable, ContainerTransitionable {
     // MARK: Properties
     private(set) var menuViewController: MenuViewController
-    private var dashboardViewController: DashboardViewController
+    private(set) var searchViewController: SearchViewController
     
     private lazy var navController: UINavigationController = {
-        let navController: UINavigationController = UINavigationController(rootViewController: dashboardViewController)
+        let navController: UINavigationController = UINavigationController(rootViewController: searchViewController)
         navController.navigationBar.tintColor = .white
-        navController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        navController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navController.navigationBar.barTintColor = AppAppearance.UltiMateLightBlue
         return navController
     }()
@@ -43,9 +43,9 @@ final class DashboardContainerViewController: UIViewController, MenuContainable,
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(menuViewController: MenuViewController, dashboardViewController: DashboardViewController) {
+    init(menuViewController: MenuViewController, searchViewController: SearchViewController) {
         self.menuViewController = menuViewController
-        self.dashboardViewController = dashboardViewController
+        self.searchViewController = searchViewController
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -60,11 +60,7 @@ final class DashboardContainerViewController: UIViewController, MenuContainable,
         
         // Set up closures
         createAnimationCompleted = {
-            self.dashboardViewController.toggleMenu()
-        }
-        
-        gameAdded = { gameInfo in
-            self.dashboardViewController.viewModel.handleGameInfo(gameInfo: gameInfo)
+            self.searchViewController.toggleMenu()
         }
     }
     
@@ -97,7 +93,7 @@ final class DashboardContainerViewController: UIViewController, MenuContainable,
     
     // MARK: Public
     func fetchGameInfo(forTitle title: String) -> GameDetailViewModel? {
-        return dashboardViewController.viewModel.gameViewModel(forTitle: title)
+        return searchViewController.viewModel.gameViewModel(forTitle: title)
     }
 
 }

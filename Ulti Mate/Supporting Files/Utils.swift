@@ -179,21 +179,6 @@ extension UIImage {
 	}
 }
 
-extension Double {
-    static func random(range: CountableClosedRange<Int> ) -> Double {
-        var offset = 0
-        
-        if range.lowerBound < 0 {
-            offset = abs(range.lowerBound)
-        }
-        
-        let mini = UInt32(range.lowerBound + offset)
-        let maxi = UInt32(range.upperBound + offset)
-        
-        return Double(mini + arc4random_uniform(maxi - mini)) - Double(offset)
-    }
-}
-
 extension UITextView {
 	static func makeWithNoPadding(andBackgroundColor backgroundColor: UIColor, editable: Bool = false, scrollEnabled: Bool = false) -> UITextView {
 		let textView: UITextView = UITextView()
