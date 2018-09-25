@@ -12,10 +12,10 @@ import MapKit
 final class GameAnnotation: MKPointAnnotation {
     // MARK: Properties
     static let Identifier: String = "GameAnnotation"
-    let viewModel: GameAnnotationModel
+    let viewModel: GameAnnotationViewModel
     
     // MARK: Life Cycle
-    init(viewModel: GameAnnotationModel) {
+    init(viewModel: GameAnnotationViewModel) {
         self.viewModel = viewModel
         
         super.init()

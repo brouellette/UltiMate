@@ -17,15 +17,8 @@ final class GameCreationCoordinator: ChildCoordinatable {
         return appCoordinator.rootViewController
     }
     
-    private lazy var navigationController: UINavigationController = {
-        let navController: UINavigationController = UINavigationController()
-        navController.navigationBar.tintColor = .white
-        navController.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navController.navigationBar.shadowImage = UIImage()
-        navController.navigationBar.isTranslucent = true
-        navController.view.backgroundColor = UIColor.clear
-        navController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navController.navigationBar.barTintColor = AppAppearance.UltiMateLightBlue
+    private lazy var navigationController: GameCreationNavigationController = {
+        let navController: GameCreationNavigationController = GameCreationNavigationController()
         return navController
     }()
     
