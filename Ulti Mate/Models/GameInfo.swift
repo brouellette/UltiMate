@@ -9,11 +9,11 @@
 import Foundation
 
 // MARK: - Struct
-struct GameInfo {
+class GameInfo {
     // MARK: Properties
-    var title: String
-    var description: String?
-    var competitiveLevel: CompetitiveLevel?
-    var longitude: Double
-    var latitude: Double
+    var title: String = ""
+    var description: String = ""
+    var competitiveLevel: CompetitiveLevel = .none
+    var longitude: Double = 0
+    var latitude: Double = 0
 }

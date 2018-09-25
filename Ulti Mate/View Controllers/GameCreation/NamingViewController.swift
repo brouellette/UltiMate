@@ -8,8 +8,6 @@
 
 import UIKit
 
-typealias GameDetails = (title: String, description: String, competitiveLevel: CompetitiveLevel, longitude: CGFloat?, latitude: CGFloat?)
-
 // MARK: - Class
 final class NamingViewController: UIViewController {
     // MARK: Properties
@@ -19,7 +17,11 @@ final class NamingViewController: UIViewController {
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 10
         textField.placeholder = NSLocalizedString("Title", comment: "")
-        textField.addTarget(self, action: #selector(handleTextFieldChanged(_:)), for: .editingChanged)
+        textField.text = viewModel.gameInfo.title
+        let spacerView = UIView(frame: CGRect(x:0, y:0, width:10, height:10))
+        textField.leftViewMode = UITextField.ViewMode.always
+        textField.leftView = spacerView
+        textField.addTarget(self, action: #selector(handleTitleUpdate(_:)), for: .editingChanged)
         return textField
     }()
     
@@ -28,17 +30,13 @@ final class NamingViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 10
+        textField.text = viewModel.gameInfo.description
         textField.placeholder = NSLocalizedString("Description", comment: "")
-        textField.addTarget(self, action: #selector(handleTextFieldChanged(_:)), for: .editingChanged)
+        let spacerView = UIView(frame: CGRect(x:0, y:0, width:10, height:10))
+        textField.leftViewMode = UITextField.ViewMode.always
+        textField.leftView = spacerView
+        textField.addTarget(self, action: #selector(handleDescriptionUpdate(_:)), for: .editingChanged)
         return textField
-    }()
-    
-    private lazy var segmentedControl: UISegmentedControl = {
-        let control: UISegmentedControl = UISegmentedControl(items: ["Casual", "Semi", "Competitive"])
-        control.tintColor = .white
-        control.translatesAutoresizingMaskIntoConstraints = false
-        control.addTarget(self, action: #selector(handleSegmentedControl(_:)), for: .valueChanged)
-        return control
     }()
     
     private lazy var continueButton: UIButton = {
@@ -70,7 +68,7 @@ final class NamingViewController: UIViewController {
     }
     
     deinit {
-        DLog("GameCreationViewController deallocated")
+        DLog("NamingViewController deallocated")
     }
     
     override func viewDidLoad() {
@@ -78,7 +76,7 @@ final class NamingViewController: UIViewController {
 
         title = NSLocalizedString("Name the Game", comment: "")
         
-        view.backgroundColor = AppAppearance.UltiMateDarkBlue
+        view.backgroundColor = AppAppearance.UltiMateLightBlue
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing)))
         
@@ -87,7 +85,6 @@ final class NamingViewController: UIViewController {
         // Add subviews
         view.addSubview(titleTextField)
         view.addSubview(descriptionTextField)
-        view.addSubview(segmentedControl)
         view.addSubview(continueButton)
         
         // Layout subviews
@@ -100,10 +97,6 @@ final class NamingViewController: UIViewController {
             descriptionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
             descriptionTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 10),
             descriptionTextField.heightAnchor.constraint(equalToConstant: 50),
-            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            segmentedControl.topAnchor.constraint(equalTo: descriptionTextField.bottomAnchor, constant: 10),
-            segmentedControl.heightAnchor.constraint(equalToConstant: 50),
             continueButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
             continueButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             continueButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
@@ -117,20 +110,23 @@ final class NamingViewController: UIViewController {
     }
     
     @objc private func handleContinueButton() {
-        viewModel.continueToMap?()
-        viewModel.createGame()
+        viewModel.proceed()
     }
     
-    @objc private func handleTextFieldChanged(_ sender: UITextField) {
-        if sender === titleTextField {
-            viewModel.title = sender.text!
-        } else {
-            viewModel.description = sender.text!
+    @objc private func handleTitleUpdate(_ sender: UITextField) {
+        guard let text: String = sender.text else {
+            return
         }
+        
+        viewModel.updateTitle(text)
     }
     
-    @objc private func handleSegmentedControl(_ sender: UISegmentedControl) {
-        viewModel.competitiveLevel = CompetitiveLevel(index: sender.selectedSegmentIndex)
+    @objc private func handleDescriptionUpdate(_ sender: UITextField) {
+        guard let text: String = sender.text else {
+            return
+        }
+        
+        viewModel.updateDescription(text)
     }
     
     // MARK: Private

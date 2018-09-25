@@ -31,6 +31,8 @@ final class GameCreationCoordinator: ChildCoordinatable {
     
     var dismissed: (() -> Void)?
     
+    private var gameInfo: GameInfo = GameInfo()
+    
     // MARK: Life Cycle
     init(appCoordinator: AppCoordinator) {
         self.appCoordinator = appCoordinator
@@ -38,35 +40,50 @@ final class GameCreationCoordinator: ChildCoordinatable {
     
     // MARK: Private
     private func showNaming() {
-        let gameCreationViewModel: NamingViewModel = NamingViewModel()
+        let gameCreationViewModel: NamingViewModel = NamingViewModel(gameInfo: gameInfo)
         gameCreationViewModel.dismiss = {
-            self.rootViewController.dismissModalChild(animated: true, type: .normal, completion: nil)
+            self.rootViewController.dismissModalChild(animated: true, type: .toRight, completion: nil)
             self.dismissed?()
         }
-        gameCreationViewModel.continueToMap = {
+        gameCreationViewModel.continueToMap = {            
             self.showLocationPicker()
         }
         
         let gameCreationViewController: NamingViewController = NamingViewController(viewModel: gameCreationViewModel)
         navigationController.setViewControllers([gameCreationViewController], animated: false)
         
-        rootViewController.presentChildModally(navigationController, animated: true, type: .normal, completion: nil)
+        rootViewController.presentChildModally(navigationController, animated: true, type: .fromRight, completion: nil)
     }
     
     private func showLocationPicker() {
-        let pickLocationViewModel: PickLocationViewModel = PickLocationViewModel()
+        let pickLocationViewModel: PickLocationViewModel = PickLocationViewModel(gameInfo: gameInfo)
         pickLocationViewModel.continueToReview = {
-            self.showReview()
+            self.showExtraDetails()
         }
         
         let pickLocationViewController: PickLocationViewController = PickLocationViewController(viewModel: pickLocationViewModel)
         self.navigationController.pushViewController(pickLocationViewController, animated: true)
     }
     
+    private func showExtraDetails() {
+        let extraDetailsViewModel: ExtraDetailsViewModel = ExtraDetailsViewModel(gameInfo: gameInfo)
+        extraDetailsViewModel.continueToReview = {            
+            self.showReview()
+        }
+        
+        let extraDetailsViewController: ExtraDetailsViewController = ExtraDetailsViewController(viewModel: extraDetailsViewModel)
+        
+        navigationController.pushViewController(extraDetailsViewController, animated: true)
+    }
+    
     private func showReview() {
         let reviewViewModel: ReviewViewModel = ReviewViewModel()
         reviewViewModel.finish = {
-            self.rootViewController.dismissModalChild(animated: true, type: .normal, completion: nil)
+            // Save to some kind of database (Firebase?)
+            AppCoordinator.gameInfoDatabase.append(self.gameInfo)
+            DLog("Game created and stored successfully!")
+            
+            self.rootViewController.dismissModalChild(animated: true, type: .toRight, completion: nil)
             self.dismissed?()
         }
         

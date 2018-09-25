@@ -15,11 +15,11 @@ final class GameDetailViewModel {
     
     var competitiveIndex: Int {
         switch gameInfo.competitiveLevel {
-        case .casual?:
+        case .casual:
             return 0
-        case .semi?:
+        case .semi:
             return 1
-        case .competitive?:
+        case .competitive:
             return 2
         default:
             return -1

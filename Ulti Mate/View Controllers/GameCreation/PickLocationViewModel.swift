@@ -11,10 +11,29 @@ import Foundation
 // MARK: - Class
 final class PickLocationViewModel {
     // MARK: Properties
+    private(set) var gameInfo: GameInfo
+    
+    var isMapShowing: UpdatableProperty<Bool> = UpdatableProperty(value: false)
+    
     var continueToReview: (() -> Void)?
     
     // MARK: Life Cycle
-    init() {
+    init(gameInfo: GameInfo) {
+        self.gameInfo = gameInfo
+    }
+    
+    // MARK: Public
+    func adjustLayout() {
+        isMapShowing.updateValue(!isMapShowing.value)
+    }
+    
+    func proceed() {
+        let longitude: Double = Double.random(in: -175...175)
+        let latitude: Double = Double.random(in: -85...85)
         
+        gameInfo.longitude = longitude
+        gameInfo.latitude = latitude
+        
+        continueToReview?()
     }
 }

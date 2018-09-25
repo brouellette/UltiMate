@@ -6,6 +6,8 @@
 //  Copyright © 2018 Codeify. All rights reserved.
 //
 
+import UIKit
+
 // MARK: Enum
 enum CompetitiveLevel {
     case casual
@@ -25,22 +27,32 @@ enum CompetitiveLevel {
             self = .none
         }
     }
+    
+    var index: Int {
+        switch self {
+        case .casual:
+            return 0
+        case .semi:
+            return 1
+        case .competitive:
+            return 2
+        case .none:
+            return UISegmentedControl.noSegment
+        }
+    }
 }
 
 // MARK: - Class
 final class NamingViewModel {
-    // MARK: Properties
-    var title: String = ""
-    var description: String = ""
-    var playerCount: Int = 0
-    var competitiveLevel: CompetitiveLevel = .none
+    // MARK: Properties    
+    private(set) var gameInfo: GameInfo
         
     var dismiss: (() -> Void)?
     var continueToMap: (() -> Void)?
     
     // MARK: Life Cycle
-    init() {
-        
+    init(gameInfo: GameInfo) {
+        self.gameInfo = gameInfo
     }
     
     // MARK: Control Handlers
@@ -50,14 +62,15 @@ final class NamingViewModel {
     
     
     // MARK: Public
-    func createGame() {
-        let longitude: Double = Double.random(in: -175...175)
-        let latitude: Double = Double.random(in: -85...85)
-        
-        let gameInfo: GameInfo = GameInfo(title: title, description: description, competitiveLevel: competitiveLevel, longitude: longitude, latitude: latitude)
-        
-        // Save to some kind of database (Firebase?)
-        AppCoordinator.gameInfoDatabase.append(gameInfo)
-        DLog("Game created and stored successfully!")
+    func updateTitle(_ title: String) {
+        self.gameInfo.title = title
+    }
+    
+    func updateDescription(_ description: String) {
+        self.gameInfo.description = description
+    }
+    
+    func proceed() {
+        continueToMap?()
     }
 }

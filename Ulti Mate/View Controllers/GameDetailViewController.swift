@@ -42,7 +42,7 @@ final class GameDetailViewController: UIViewController {
     private lazy var descriptionTextView: UITextView = {
         let textView: UITextView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.text = NSLocalizedString("\(viewModel.gameInfo.description ?? "")", comment: "")
+        textView.text = NSLocalizedString("\(viewModel.gameInfo.description)", comment: "")
         textView.backgroundColor = .white
         textView.isEditable = false
         textView.font = UIFont.systemFont(ofSize: 16)
