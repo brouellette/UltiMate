@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C40F486F2152A08E00965710 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F486E2152A08E00965710 /* MenuViewController.swift */; };
-		C40F48712154028D00965710 /* DashboardContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F48702154028D00965710 /* DashboardContainerViewController.swift */; };
+		C40F48712154028D00965710 /* SearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F48702154028D00965710 /* SearchContainerViewController.swift */; };
 		C40F48742154031400965710 /* MenuGestureHandlable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F48722154031400965710 /* MenuGestureHandlable.swift */; };
 		C40F48752154031400965710 /* MenuContainable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F48732154031400965710 /* MenuContainable.swift */; };
 		C40F487721542C0D00965710 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F487621542C0D00965710 /* MenuViewModel.swift */; };
@@ -23,6 +23,7 @@
 		C4255854215980BB00B0E499 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4255853215980BB00B0E499 /* ReviewViewModel.swift */; };
 		C42558562159AFC300B0E499 /* ExtraDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42558552159AFC300B0E499 /* ExtraDetailsViewController.swift */; };
 		C42558582159AFD100B0E499 /* ExtraDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42558572159AFD100B0E499 /* ExtraDetailsViewModel.swift */; };
+		C425585A215ABE7500B0E499 /* GameCreationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4255859215ABE7500B0E499 /* GameCreationNavigationController.swift */; };
 		C44E3C49213A4E7600FE965F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E3C48213A4E7600FE965F /* AppDelegate.swift */; };
 		C44E3C51213A4E7600FE965F /* Ulti_Mate.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C44E3C4F213A4E7600FE965F /* Ulti_Mate.xcdatamodeld */; };
 		C44E3C53213A4E7700FE965F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C44E3C52213A4E7700FE965F /* Assets.xcassets */; };
@@ -35,8 +36,8 @@
 		C44E3C6C213A581500FE965F /* ViewControllerContainable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E3C6A213A581500FE965F /* ViewControllerContainable.swift */; };
 		C44E3C6F213A5E5800FE965F /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E3C6E213A5E5800FE965F /* SignInViewModel.swift */; };
 		C44E3C71213AFE0500FE965F /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E3C70213AFE0500FE965F /* SearchCoordinator.swift */; };
-		C44E3C73213AFE5A00FE965F /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E3C72213AFE5A00FE965F /* DashboardViewController.swift */; };
-		C44E3C75213AFE8700FE965F /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E3C74213AFE8700FE965F /* DashboardViewModel.swift */; };
+		C44E3C73213AFE5A00FE965F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E3C72213AFE5A00FE965F /* SearchViewController.swift */; };
+		C44E3C75213AFE8700FE965F /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E3C74213AFE8700FE965F /* SearchViewModel.swift */; };
 		C44E3C77213B055A00FE965F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E3C76213B055A00FE965F /* Utils.swift */; };
 		C44E3C79213B072B00FE965F /* UpdatableProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E3C78213B072B00FE965F /* UpdatableProperty.swift */; };
 		C44E3C7C213B096400FE965F /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E3C7B213B096400FE965F /* DashboardTableViewCell.swift */; };
@@ -48,7 +49,7 @@
 
 /* Begin PBXFileReference section */
 		C40F486E2152A08E00965710 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		C40F48702154028D00965710 /* DashboardContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardContainerViewController.swift; sourceTree = "<group>"; };
+		C40F48702154028D00965710 /* SearchContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContainerViewController.swift; sourceTree = "<group>"; };
 		C40F48722154031400965710 /* MenuGestureHandlable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuGestureHandlable.swift; sourceTree = "<group>"; };
 		C40F48732154031400965710 /* MenuContainable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuContainable.swift; sourceTree = "<group>"; };
 		C40F487621542C0D00965710 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
@@ -63,6 +64,7 @@
 		C4255853215980BB00B0E499 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		C42558552159AFC300B0E499 /* ExtraDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraDetailsViewController.swift; sourceTree = "<group>"; };
 		C42558572159AFD100B0E499 /* ExtraDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraDetailsViewModel.swift; sourceTree = "<group>"; };
+		C4255859215ABE7500B0E499 /* GameCreationNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCreationNavigationController.swift; sourceTree = "<group>"; };
 		C44E3C45213A4E7600FE965F /* Ulti Mate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ulti Mate.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44E3C48213A4E7600FE965F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C44E3C50213A4E7600FE965F /* Ulti_Mate.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ulti_Mate.xcdatamodel; sourceTree = "<group>"; };
@@ -77,8 +79,8 @@
 		C44E3C6A213A581500FE965F /* ViewControllerContainable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerContainable.swift; sourceTree = "<group>"; };
 		C44E3C6E213A5E5800FE965F /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		C44E3C70213AFE0500FE965F /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
-		C44E3C72213AFE5A00FE965F /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
-		C44E3C74213AFE8700FE965F /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		C44E3C72213AFE5A00FE965F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		C44E3C74213AFE8700FE965F /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		C44E3C76213B055A00FE965F /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C44E3C78213B072B00FE965F /* UpdatableProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatableProperty.swift; sourceTree = "<group>"; };
 		C44E3C7B213B096400FE965F /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
@@ -113,9 +115,9 @@
 			children = (
 				C40F487621542C0D00965710 /* MenuViewModel.swift */,
 				C40F486E2152A08E00965710 /* MenuViewController.swift */,
-				C44E3C74213AFE8700FE965F /* DashboardViewModel.swift */,
-				C44E3C72213AFE5A00FE965F /* DashboardViewController.swift */,
-				C40F48702154028D00965710 /* DashboardContainerViewController.swift */,
+				C44E3C74213AFE8700FE965F /* SearchViewModel.swift */,
+				C44E3C72213AFE5A00FE965F /* SearchViewController.swift */,
+				C40F48702154028D00965710 /* SearchContainerViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -123,6 +125,7 @@
 		C425584C21597B7E00B0E499 /* GameCreation */ = {
 			isa = PBXGroup;
 			children = (
+				C4255859215ABE7500B0E499 /* GameCreationNavigationController.swift */,
 				C40F487A21547F1A00965710 /* NamingViewModel.swift */,
 				C40F487821547EDA00965710 /* NamingViewController.swift */,
 				C425584F21597F6800B0E499 /* PickLocationViewModel.swift */,
@@ -306,15 +309,16 @@
 				C40F48742154031400965710 /* MenuGestureHandlable.swift in Sources */,
 				C44E3C6B213A581500FE965F /* ContainerTransitionable.swift in Sources */,
 				C44E3C71213AFE0500FE965F /* SearchCoordinator.swift in Sources */,
-				C40F48712154028D00965710 /* DashboardContainerViewController.swift in Sources */,
+				C40F48712154028D00965710 /* SearchContainerViewController.swift in Sources */,
 				C425584E21597DBE00B0E499 /* PickLocationViewController.swift in Sources */,
 				C44E3C6C213A581500FE965F /* ViewControllerContainable.swift in Sources */,
 				C42558522159807B00B0E499 /* ReviewViewController.swift in Sources */,
 				C44E3C79213B072B00FE965F /* UpdatableProperty.swift in Sources */,
 				C44E3C7E213B0D7900FE965F /* DashboardTableViewModel.swift in Sources */,
-				C44E3C75213AFE8700FE965F /* DashboardViewModel.swift in Sources */,
+				C44E3C75213AFE8700FE965F /* SearchViewModel.swift in Sources */,
 				C4255847215969A000B0E499 /* GameAnnotation.swift in Sources */,
 				C44E3C63213A53CC00FE965F /* AppCoordinator.swift in Sources */,
+				C425585A215ABE7500B0E499 /* GameCreationNavigationController.swift in Sources */,
 				C425584921596A0C00B0E499 /* GameAnnotationViewModel.swift in Sources */,
 				C44E3C77213B055A00FE965F /* Utils.swift in Sources */,
 				C40F487921547EDA00965710 /* NamingViewController.swift in Sources */,
@@ -332,7 +336,7 @@
 				C42558562159AFC300B0E499 /* ExtraDetailsViewController.swift in Sources */,
 				C44E3C82213B4E8C00FE965F /* GameDetailViewModel.swift in Sources */,
 				C44E3C51213A4E7600FE965F /* Ulti_Mate.xcdatamodeld in Sources */,
-				C44E3C73213AFE5A00FE965F /* DashboardViewController.swift in Sources */,
+				C44E3C73213AFE5A00FE965F /* SearchViewController.swift in Sources */,
 				C42558582159AFD100B0E499 /* ExtraDetailsViewModel.swift in Sources */,
 				C44E3C49213A4E7600FE965F /* AppDelegate.swift in Sources */,
 				C44E3C65213A54AF00FE965F /* OnboardingCoordinator.swift in Sources */,

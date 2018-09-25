@@ -41,24 +41,22 @@ final class SearchViewController: UIViewController, MenuGestureHandlable {
     
     var menuIsEnabled: Bool = true
     
-    let viewModel: DashboardViewModel
+    let viewModel: SearchViewModel
     
     // MARK: Life Cycle
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(viewModel: DashboardViewModel) {
+    init(viewModel: SearchViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
-    deinit {
-        print("DASHBOARDVIEWCONTROLLER DEALLOCATED")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        title = NSLocalizedString("Search", comment: "")
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "HamburgerMenuIcon"), style: .plain, target: self, action: #selector(menuButtonHit))
 
@@ -72,13 +70,8 @@ final class SearchViewController: UIViewController, MenuGestureHandlable {
         view.addSubview(mapView)
         
         // Layout subviews
-        if #available(iOS 11.0, *) {
-            mapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        } else {
-            mapView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
-        }
-        
         NSLayoutConstraint.activate([
+            mapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -121,7 +114,7 @@ final class SearchViewController: UIViewController, MenuGestureHandlable {
 }
 
 // MARK: Extension
-extension SearchViewController: MKMapViewDelegate, CLLocationManagerDelegate {
+extension SearchViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         mapView.deselectAnnotation(view.annotation, animated: true)
         

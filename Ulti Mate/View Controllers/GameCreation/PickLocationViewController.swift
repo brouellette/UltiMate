@@ -49,6 +49,11 @@ final class PickLocationViewController: UIViewController {
         map.translatesAutoresizingMaskIntoConstraints = false
         map.alpha = 0
         map.layer.cornerRadius = 10
+        map.delegate = self
+        let pointAnnotation: MKPointAnnotation = MKPointAnnotation()
+        pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: viewModel.gameInfo.latitude, longitude: viewModel.gameInfo.longitude)
+        map.addAnnotation(pointAnnotation)
+        map.centerCoordinate = pointAnnotation.coordinate
         return map
     }()
     
@@ -151,4 +156,32 @@ final class PickLocationViewController: UIViewController {
     
     // MARK: Public
 
+}
+
+extension PickLocationViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let pointAnnotation: MKPointAnnotation = annotation as? MKPointAnnotation else {
+            DLog("Error. Not a pointAnnotation")
+            return nil
+        }
+        
+        let annotationView: MKAnnotationView = MKAnnotationView(annotation: pointAnnotation, reuseIdentifier: "Identifier")
+        annotationView.image = UIImage(named: "PinIcon")
+        
+        annotationView.isDraggable = true
+        
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
+        guard let annotation: MKAnnotation = view.annotation else {
+            DLog("Error. No annotion availabel for view: \(view)")
+            return
+        }
+        
+        let longitude: Double = annotation.coordinate.longitude
+        let latitude: Double = annotation.coordinate.latitude
+        
+        viewModel.updateCoordinate(longitude: longitude, latitude: latitude)
+    }
 }

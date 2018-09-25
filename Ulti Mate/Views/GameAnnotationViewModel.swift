@@ -1,5 +1,5 @@
 //
-//  GameAnnotationModel.swift
+//  GameAnnotationViewModel.swift
 //  Ulti Mate
 //
 //  Created by travis ouellette on 9/24/18.
@@ -7,7 +7,7 @@
 //
 
 // MARK: - Class
-final class GameAnnotationModel {
+final class GameAnnotationViewModel {
     // MARK: Properties
     var gameInfo: GameInfo
     

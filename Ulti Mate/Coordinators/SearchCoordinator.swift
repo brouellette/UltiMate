@@ -42,7 +42,7 @@ final class SearchCoordinator: ChildCoordinatable {
         let menuViewController: MenuViewController = MenuViewController(viewModel: menuViewModel)
         
         // Set up the dashboard viewModel and viewController for the main display of the dashboard
-        let dashboardViewModel: DashboardViewModel = DashboardViewModel()
+        let dashboardViewModel: SearchViewModel = SearchViewModel()
         dashboardViewModel.signedOut = {
             self.signedOut?()
         }

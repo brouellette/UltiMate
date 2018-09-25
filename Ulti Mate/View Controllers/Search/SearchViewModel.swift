@@ -1,21 +1,13 @@
 //
-//  DashboardViewModel.swift
+//  SearchViewModel.swift
 //  Ulti Mate
 //
 //  Created by travis ouellette on 9/1/18.
 //  Copyright © 2018 Codeify. All rights reserved.
 //
 
-//import MapKit
-
-// MARK: Enum
-enum DashboardLayoutState {
-    case map
-    case table
-}
-
 // MARK - Class
-final class DashboardViewModel {
+final class SearchViewModel {
     // MARK: Properties
     var gameViewModels: [GameDetailViewModel] = []
     
@@ -32,7 +24,7 @@ final class DashboardViewModel {
     
     // MARK: Public
     func createAnnotation(withInfo info: GameInfo) -> GameAnnotation {
-        let annotationViewModel: GameAnnotationModel = GameAnnotationModel(gameInfo: info)
+        let annotationViewModel: GameAnnotationViewModel = GameAnnotationViewModel(gameInfo: info)
         let annotation: GameAnnotation = GameAnnotation(viewModel: annotationViewModel)
         
         return annotation

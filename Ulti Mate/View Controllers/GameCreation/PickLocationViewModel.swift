@@ -6,8 +6,6 @@
 //  Copyright © 2018 Codeify. All rights reserved.
 //
 
-import Foundation
-
 // MARK: - Class
 final class PickLocationViewModel {
     // MARK: Properties
@@ -20,20 +18,26 @@ final class PickLocationViewModel {
     // MARK: Life Cycle
     init(gameInfo: GameInfo) {
         self.gameInfo = gameInfo
-    }
-    
-    // MARK: Public
-    func adjustLayout() {
-        isMapShowing.updateValue(!isMapShowing.value)
-    }
-    
-    func proceed() {
+        
+        // TODO: Remove this later and use user's current location instead
         let longitude: Double = Double.random(in: -175...175)
         let latitude: Double = Double.random(in: -85...85)
         
         gameInfo.longitude = longitude
         gameInfo.latitude = latitude
-        
+    }
+    
+    // MARK: Public
+    func updateCoordinate(longitude: Double, latitude: Double) {
+        gameInfo.longitude = longitude
+        gameInfo.latitude = latitude
+    }
+    
+    func adjustLayout() {
+        isMapShowing.updateValue(!isMapShowing.value)
+    }
+    
+    func proceed() {
         continueToReview?()
     }
 }
