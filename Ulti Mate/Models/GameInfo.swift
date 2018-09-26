@@ -8,12 +8,14 @@
 
 import Foundation
 
+typealias Coordinate = (longitude: Double, latitude:  Double)
+
 // MARK: - Struct
 class GameInfo {
     // MARK: Properties
     var title: String = ""
     var description: String = ""
     var competitiveLevel: CompetitiveLevel = .none
-    var longitude: Double = 0
-    var latitude: Double = 0
+    var coordinate: Coordinate = Coordinate(longitude: 0, latitude: 0)
+    var attendingPlayerCount: Int = 0
 }

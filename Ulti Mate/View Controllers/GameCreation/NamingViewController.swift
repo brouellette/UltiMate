@@ -17,6 +17,7 @@ final class NamingViewController: UIViewController {
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 10
         textField.placeholder = NSLocalizedString("Title", comment: "")
+        textField.clearButtonMode = .whileEditing
         textField.text = viewModel.gameInfo.title
         let spacerView = UIView(frame: CGRect(x:0, y:0, width:10, height:10))
         textField.leftViewMode = UITextField.ViewMode.always
@@ -30,6 +31,7 @@ final class NamingViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 10
+        textField.clearButtonMode = .whileEditing
         textField.text = viewModel.gameInfo.description
         textField.placeholder = NSLocalizedString("Description", comment: "")
         let spacerView = UIView(frame: CGRect(x:0, y:0, width:10, height:10))

@@ -32,7 +32,7 @@ final class GameDetailViewController: UIViewController {
     private lazy var locationLabel: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("\(viewModel.gameInfo.longitude), \(viewModel.gameInfo.latitude)", comment: "")
+        label.text = NSLocalizedString("\(viewModel.gameInfo.coordinate.longitude), \(viewModel.gameInfo.coordinate.latitude)", comment: "")
         label.font = UIFont.systemFont(ofSize: 18)
         label.textAlignment = .center
         label.textColor = .white
