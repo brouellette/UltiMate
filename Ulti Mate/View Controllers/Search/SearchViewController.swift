@@ -56,7 +56,7 @@ final class SearchViewController: UIViewController, MenuGestureHandlable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = NSLocalizedString("Search", comment: "")
+        title = NSLocalizedString("UltiMate", comment: "")
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "HamburgerMenuIcon"), style: .plain, target: self, action: #selector(menuButtonHit))
 

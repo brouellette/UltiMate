@@ -16,10 +16,13 @@ final class PickLocationViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
         textField.placeholder = NSLocalizedString("Search...", comment: "")
+        textField.clearButtonMode = .whileEditing
         textField.layer.cornerRadius = 10
+        textField.autocapitalizationType = .words
         let spacerView = UIView(frame: CGRect(x:0, y:0, width:10, height:10))
         textField.leftViewMode = UITextField.ViewMode.always
         textField.leftView = spacerView
+        textField.addTarget(self, action: #selector(handleTextField(_:)), for: .editingChanged)
         textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return textField
     }()
@@ -39,7 +42,7 @@ final class PickLocationViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.backgroundColor = AppAppearance.UltiMateDarkBlue
-        button.addTarget(self, action: #selector(handleMapLayoutAdjustment), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleOrUsMapButton), for: .touchUpInside)
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return button
     }()
@@ -50,10 +53,6 @@ final class PickLocationViewController: UIViewController {
         map.alpha = 0
         map.layer.cornerRadius = 10
         map.delegate = self
-        let pointAnnotation: MKPointAnnotation = MKPointAnnotation()
-        pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: viewModel.gameInfo.latitude, longitude: viewModel.gameInfo.longitude)
-        map.addAnnotation(pointAnnotation)
-        map.centerCoordinate = pointAnnotation.coordinate
         return map
     }()
     
@@ -62,7 +61,7 @@ final class PickLocationViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "XButtonIcon"), for: .normal)
         button.tintColor = AppAppearance.UltiMateDarkBlue
-        button.addTarget(self, action: #selector(handleMapLayoutAdjustment), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleDismissMapButton), for: .touchUpInside)
         button.widthAnchor.constraint(equalToConstant: 25).isActive = true
         button.heightAnchor.constraint(equalToConstant: 25).isActive = true
         return button
@@ -143,12 +142,62 @@ final class PickLocationViewController: UIViewController {
     }
     
     // MARK: Control Handlers
-    @objc private func handleMapLayoutAdjustment() {
+    @objc private func handleOrUsMapButton() {
+        let pointAnnotation: MKPointAnnotation = MKPointAnnotation()
+        pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: viewModel.gameInfo.coordinate.latitude, longitude: viewModel.gameInfo.coordinate.longitude)
+        mapView.addAnnotation(pointAnnotation)
+//        mapView.centerCoordinate = pointAnnotation.coordinate
+        mapView.setCamera(MKMapCamera(lookingAtCenter: pointAnnotation.coordinate, fromDistance: 1000, pitch: 0, heading: 1), animated: false)
+        
+        view.endEditing(true)
+        
+        viewModel.adjustLayout()
+    }
+    
+    @objc private func handleDismissMapButton() {
         viewModel.adjustLayout()
     }
     
     @objc private func handleContinueButton() {
         viewModel.proceed()
+    }
+    
+    @objc func handleTextField(_ sender: UITextField) {
+        let request: MKLocalSearch.Request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = sender.text
+        request.region = mapView.region
+        
+        handleSearch(request: request)
+    }
+    
+    private func handleSearch(request: MKLocalSearch.Request) {
+        let search = MKLocalSearch(request: request)
+        search.start(completionHandler: { response, error in
+            if error != nil {
+                print("Error occurred in search: \(error!.localizedDescription)")
+            } else if response!.mapItems.count == 0 {
+                print("No matches found")
+            } else {
+                guard let response: MKLocalSearch.Response = response else {
+                    return
+                }
+                
+                guard let firstMapItem: MKMapItem = response.mapItems.first else {
+                    return
+                }
+                
+                let longitude: Double = firstMapItem.placemark.coordinate.longitude
+                let latitude: Double = firstMapItem.placemark.coordinate.latitude
+                
+                self.viewModel.updateCoordinate(longitude: longitude, latitude: latitude)
+                
+                print("Matches found!")
+                self.mapView.centerCoordinate = firstMapItem.placemark.coordinate
+                response.mapItems.forEach({ item in
+                    print("Name = \(item.name ?? "Unknown")")
+                })
+            }
+        })
     }
     
     // MARK: Private

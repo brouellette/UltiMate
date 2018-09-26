@@ -23,14 +23,14 @@ final class PickLocationViewModel {
         let longitude: Double = Double.random(in: -175...175)
         let latitude: Double = Double.random(in: -85...85)
         
-        gameInfo.longitude = longitude
-        gameInfo.latitude = latitude
+        gameInfo.coordinate.longitude = longitude
+        gameInfo.coordinate.latitude = latitude
     }
     
     // MARK: Public
     func updateCoordinate(longitude: Double, latitude: Double) {
-        gameInfo.longitude = longitude
-        gameInfo.latitude = latitude
+        gameInfo.coordinate.longitude = longitude
+        gameInfo.coordinate.latitude = latitude
     }
     
     func adjustLayout() {

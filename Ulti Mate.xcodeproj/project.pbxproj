@@ -138,6 +138,15 @@
 			path = GameCreation;
 			sourceTree = "<group>";
 		};
+		C425585B215BDAA000B0E499 /* GameDetail */ = {
+			isa = PBXGroup;
+			children = (
+				C44E3C81213B4E8C00FE965F /* GameDetailViewModel.swift */,
+				C44E3C7F213B4E8000FE965F /* GameDetailViewController.swift */,
+			);
+			path = GameDetail;
+			sourceTree = "<group>";
+		};
 		C44E3C3C213A4E7600FE965F = {
 			isa = PBXGroup;
 			children = (
@@ -191,8 +200,7 @@
 				C425584A21597B6D00B0E499 /* Onboarding */,
 				C425584B21597B7700B0E499 /* Search */,
 				C425584C21597B7E00B0E499 /* GameCreation */,
-				C44E3C81213B4E8C00FE965F /* GameDetailViewModel.swift */,
-				C44E3C7F213B4E8000FE965F /* GameDetailViewController.swift */,
+				C425585B215BDAA000B0E499 /* GameDetail */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

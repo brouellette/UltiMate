@@ -20,7 +20,7 @@ final class GameAnnotation: MKPointAnnotation {
         
         super.init()
         
-        coordinate = CLLocationCoordinate2D(latitude: viewModel.gameInfo.latitude, longitude: viewModel.gameInfo.longitude)
+        coordinate = CLLocationCoordinate2D(latitude: viewModel.gameInfo.coordinate.latitude, longitude: viewModel.gameInfo.coordinate.longitude)
         title = viewModel.gameInfo.title
         subtitle = viewModel.gameInfo.description
     }
