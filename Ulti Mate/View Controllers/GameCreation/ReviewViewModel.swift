@@ -9,10 +9,12 @@
 // MARK: - Class
 final class ReviewViewModel {
     // MARK: Properties
+    private(set) var gameInfo: GameInfo
+    
     var finish: (() -> Void)?
     
     // MARK: Life Cycle
-    init() {
-        
+    init(gameInfo: GameInfo) {
+        self.gameInfo = gameInfo
     }
 }
