@@ -146,7 +146,6 @@ final class PickLocationViewController: UIViewController {
         let pointAnnotation: MKPointAnnotation = MKPointAnnotation()
         pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: viewModel.gameInfo.coordinate.latitude, longitude: viewModel.gameInfo.coordinate.longitude)
         mapView.addAnnotation(pointAnnotation)
-//        mapView.centerCoordinate = pointAnnotation.coordinate
         mapView.setCamera(MKMapCamera(lookingAtCenter: pointAnnotation.coordinate, fromDistance: 1000, pitch: 0, heading: 1), animated: false)
         
         view.endEditing(true)

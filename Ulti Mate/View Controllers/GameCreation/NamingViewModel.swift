@@ -40,6 +40,19 @@ enum CompetitiveLevel {
             return UISegmentedControl.noSegment
         }
     }
+    
+    var string: String {
+        switch self {
+        case .casual:
+            return NSLocalizedString("Casual", comment: "")
+        case .semi:
+            return NSLocalizedString("Semi-Competitve", comment: "")
+        case .competitive:
+            return NSLocalizedString("Competitve", comment: "")
+        case .none:
+            return NSLocalizedString("None", comment: "")
+        }
+    }
 }
 
 // MARK: - Class

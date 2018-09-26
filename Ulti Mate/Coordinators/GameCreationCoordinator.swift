@@ -70,7 +70,7 @@ final class GameCreationCoordinator: ChildCoordinatable {
     }
     
     private func showReview() {
-        let reviewViewModel: ReviewViewModel = ReviewViewModel()
+        let reviewViewModel: ReviewViewModel = ReviewViewModel(gameInfo: gameInfo)
         reviewViewModel.finish = {
             // Save to some kind of database (Firebase?)
             AppCoordinator.gameInfoDatabase.append(self.gameInfo)
