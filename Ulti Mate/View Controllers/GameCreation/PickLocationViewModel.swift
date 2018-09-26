@@ -20,11 +20,13 @@ final class PickLocationViewModel {
         self.gameInfo = gameInfo
         
         // TODO: Remove this later and use user's current location instead
-        let longitude: Double = Double.random(in: -175...175)
-        let latitude: Double = Double.random(in: -85...85)
-        
-        gameInfo.coordinate.longitude = longitude
-        gameInfo.coordinate.latitude = latitude
+        if gameInfo.coordinate.longitude == 0 && gameInfo.coordinate.latitude == 0 {
+            let longitude: Double = Double.random(in: -175...175)
+            let latitude: Double = Double.random(in: -85...85)
+            
+            gameInfo.coordinate.longitude = longitude
+            gameInfo.coordinate.latitude = latitude
+        }
     }
     
     // MARK: Public

@@ -16,6 +16,6 @@ class GameInfo {
     var title: String = ""
     var description: String = ""
     var competitiveLevel: CompetitiveLevel = .none
-    var coordinate: Coordinate = Coordinate(longitude: 0, latitude: 0)
+    var coordinate: Coordinate = Coordinate(longitude: 0, latitude: 0) // default should be user's location
     var attendingPlayerCount: Int = 0
 }
